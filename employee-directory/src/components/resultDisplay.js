@@ -1,6 +1,7 @@
 import api from "../utils/api";
 import React, { Component } from "react";
 import EmployeeCard from "./employeeCard";
+import SearchBar from "./searchBar";
 
 class ResultDisplay extends Component {
     state = {
@@ -33,6 +34,9 @@ class ResultDisplay extends Component {
             <div className="container">
                 <div className="row">
                     <h1>Employee Directory</h1>
+                </div>
+                <div className="row">
+                    <SearchBar/>
                 </div>
                 <div className="row">
                     <table className="table">
