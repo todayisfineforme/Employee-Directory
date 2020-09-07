@@ -7,9 +7,10 @@ class ResultDisplay extends Component {
     state = {
         result: [],
         filter: "",
-        filterBy: "lastName",
+        filterBy: "Name",
         currentSort: "default",
-        sortField: ""
+        sortField: "",
+        search: ""
     };
     employees = []
     
@@ -28,6 +29,29 @@ class ResultDisplay extends Component {
         }).catch(err => console.log(err));
     }
 
+    searchEmployee = (searchkey) => {
+        if (!searchkey){
+            this.setState({
+            result:this.employees
+            })
+        } else {
+            const filterResult = this.employees.filter(person => person.name === searchkey)
+            this.setState({
+            result:filterResult
+            })
+        }
+    }
+
+    searchFieldChange = event =>{
+        event.preventDefault();
+        const value = event.target.value;
+        this.setState({search:value});
+    };
+
+    searchEvent = event => {
+        event.preventDefault();
+        this.searchEmployee(this.state.search)
+    }
 
     render(){
         return(
@@ -36,7 +60,10 @@ class ResultDisplay extends Component {
                     <h1>Employee Directory</h1>
                 </div>
                 <div className="row">
-                    <SearchBar/>
+                    <SearchBar
+                        searchEvent={this.searchEvent} 
+                        searchFieldChange={this.searchFieldChange}   
+                    />
                 </div>
                 <div className="row">
                     <table className="table">
