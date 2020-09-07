@@ -53,6 +53,30 @@ class ResultDisplay extends Component {
         this.searchEmployee(this.state.search)
     }
 
+    sortName = event => {
+        event.preventDefault();
+        const sortResult = (this.state.result).sort((a,b) => (a.name > b.name) ? 1 : -1)
+        this.setState({
+            result:sortResult 
+        })
+    }
+
+    sortSalary = event => {
+        event.preventDefault();
+        const sortResult = (this.state.result).sort((a,b) => (a.salary > b.salary) ? 1 : -1)
+        this.setState({
+            result:sortResult 
+        })
+    }
+
+    sortAge = event => {
+        event.preventDefault();
+        const sortResult = (this.state.result).sort((a,b) => (a.age > b.age) ? 1 : -1)
+        this.setState({
+            result:sortResult 
+        })
+    }
+
     render(){
         return(
             <div className="container">
@@ -69,9 +93,9 @@ class ResultDisplay extends Component {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Salary</th>
-                                <th>Age</th>
+                                <th onClick={this.sortName}>Name</th>
+                                <th onClick={this.sortSalary}>Salary</th>
+                                <th onClick={this.sortAge}>Age</th>
                             </tr>
                         </thead>
                         <tbody>
