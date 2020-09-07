@@ -1,5 +1,6 @@
 import api from "../utils/api";
 import React, { Component } from "react";
+import EmployeeCard from "./employeeCard";
 
 class ResultDisplay extends Component {
     state = {
@@ -16,13 +17,13 @@ class ResultDisplay extends Component {
             console.log(res)
             this.setState({
                 result: res.data.data.map((e, i) => ({
-                    employee_name: e.employee_name,
-                    employee_salary: e.employee_salary,
-                    employee_age: e.employee_age,
+                    name: e.employee_name,
+                    salary: e.employee_salary,
+                    age: e.employee_age,
                     key: i
                 }))
             });
-            this.allEmpl = this.state.result;
+            this.employees = this.state.result;
         }).catch(err => console.log(err));
     }
 
@@ -32,6 +33,27 @@ class ResultDisplay extends Component {
             <div className="container">
                 <div className="row">
                     <h1>Employee Directory</h1>
+                </div>
+                <div className="row">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Salary</th>
+                                <th>Age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {[...this.state.result].map((employee) => 
+                            <EmployeeCard
+                                name={employee.name}
+                                salary={employee.salary}
+                                age={employee.age}
+                                key={employee.key}
+                            />
+                            )}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         )
