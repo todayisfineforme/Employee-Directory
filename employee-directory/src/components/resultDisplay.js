@@ -9,8 +9,7 @@ class ResultDisplay extends Component {
         filter: "",
         filterBy: "Name",
         currentSort: "default",
-        sortField: "",
-        search: ""
+        sortField: ""
     };
     employees = []
     
@@ -42,15 +41,42 @@ class ResultDisplay extends Component {
         }
     }
 
-    searchFieldChange = event =>{
+    inputFieldChange = event => {
         event.preventDefault();
+        const id = event.target.id; 
         const value = event.target.value;
-        this.setState({search:value});
+        this.setState({[id]:value});
     };
 
     searchEvent = event => {
         event.preventDefault();
         this.searchEmployee(this.state.search)
+    }
+
+    salaryFilter = () =>{
+        const employeeList = this.employees;
+        const minSalary = this.state.minSalary;
+        const maxSalary = this.state.maxSalary;
+        let salaryArr = [];
+        if (!minSalary || !maxSalary){
+            for (const employee of employeeList) { 
+                salaryArr.push(employee)
+            }
+        }else{
+            for (const employee of employeeList) {
+                if (employee.salary >= minSalary && employee.salary <= maxSalary) {
+                    salaryArr.push(employee)
+                }
+            }
+        }
+        this.setState({
+            result: salaryArr 
+        })
+    }
+
+    filterEvent = event => {
+        event.preventDefault();
+        this.salaryFilter();
     }
 
     sortName = event => {
@@ -81,12 +107,13 @@ class ResultDisplay extends Component {
         return(
             <div className="container">
                 <div className="row">
-                    <h1>Employee Directory</h1>
+                    <h1 className="display-4 my-5">Employee Directory</h1>
                 </div>
-                <div className="row">
+                <div className="row my-2">
                     <SearchBar
                         searchEvent={this.searchEvent} 
-                        searchFieldChange={this.searchFieldChange}   
+                        inputFieldChange={this.inputFieldChange}  
+                        filterEvent={this.filterEvent} 
                     />
                 </div>
                 <div className="row">
