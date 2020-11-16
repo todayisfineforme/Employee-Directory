@@ -1,6 +1,6 @@
 # Employee Directory
 
-Foobar is a Python library for dealing with word pluralization.
+React app that allows users to view a list of employees, and sort, filter and seach within it.
 
 ## Installation
 
