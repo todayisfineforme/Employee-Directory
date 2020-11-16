@@ -4,11 +4,12 @@ React app that allows users to view a list of employees, and sort, filter and se
 
 ## Installation
 
-Use the node package manager [npm](https://nodejs.org/en/) to install foobar.
+clone repo and then 
 
 ```bash
-npm install foobar
+npm install
 ```
+to install dependencies
 
 ## Usage
 
